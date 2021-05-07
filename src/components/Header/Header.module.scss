@@ -1,0 +1,29 @@
+.appHeader {
+    background-color: #c90303;
+    ul {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       height: 4rem;
+       list-style: none;
+
+       li {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0 1rem;
+    }
+   }
+   button, img {
+       position: absolute;
+       left: 3px;
+
+       height: 4.1rem;
+       width: 3.8rem;
+       background: transparent;
+       border: none;
+
+       &:hover {
+           cursor: pointer;
+       }
+   }
+}

@@ -1,0 +1,30 @@
+.heroDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid red;
+
+    padding-top: 2rem;
+
+    .hero {
+        border: 1px solid red;
+        height: 100%;
+
+        h1 {
+            text-align: center;
+            color: rgb(235, 235, 235);
+        }
+        img {
+            width: 28rem;    
+            height: 30rem;
+            object-fit:cover;
+            border-radius: 7px;
+        }
+    }
+    .details {
+        flex: 1;
+        border: 1px solid red;
+        max-width: 40rem;
+        color: rgb(243, 243, 243);
+    }
+}
