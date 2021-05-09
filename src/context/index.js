@@ -1,48 +1,86 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 import md5 from "md5";
 import axios from "axios";
 
 export const HeroesContext = createContext();
 
 export function HeroesContextProvider({ children }) {
-    const [heroDetails, setHeroDetails] = useState({});
-    const [getHeroes, setGetHeroes] = useState([]);
+  const [category, setCategory] = useState('characters');
+  const [heroDetails, setHeroDetails] = useState({});
+  const [getHeroes, setGetHeroes] = useState([]);
+  const [nextPreviousHeroes, setNextPreviousHeroes] = useState(0);
+  const [searchedHero, setSearchedHero] = useState({});
+  const [toggleSearch, setToggleSearch] = useState(Boolean);
 
-    function renderHeroDetails(hero) {
-        setHeroDetails(hero);
+  const publicKEY = "87fa0016c6af282d2b76bc952180cb23";
+  const privateKEY = "3b20eeafd6247347cbbaaa97b990e8d5f9de7eea";
+  const time = Number(new Date());
+  const hash = md5(time + privateKEY + publicKEY);
+
+  function selectCategory(option) {
+    setCategory(option);
+  }
+  
+  async function fetch() {
+    const { data } = await axios.get(
+      `http://gateway.marvel.com/v1/public/${category}?limit=12&offset=${nextPreviousHeroes}&ts=${time}&apikey=${publicKEY}&hash=${hash}`
+      );
+      
+      setGetHeroes(data.data.results);
     }
-        
-    async function fetch() {
-        const publicKEY = "87fa0016c6af282d2b76bc952180cb23";
-        const privateKEY = "3b20eeafd6247347cbbaaa97b990e8d5f9de7eea";
- 
-        const time = Number(new Date());
 
-        const hash = md5(time + privateKEY + publicKEY);
+  const fetchHeroSearch = async(hero) => {
+    const {data} = await axios.get(`http://gateway.marvel.com/v1/public/characters/${hero}?ts=${time}&apikey=${publicKEY}&hash=${hash}`);
 
-        const { data } = await axios.get(
-        `http://gateway.marvel.com/v1/public/characters?limit=12&offset=0&ts=${time}&apikey=${publicKEY}&hash=${hash}`
-        );
+    const result = data.data.results[0]
 
-        setGetHeroes(data.data.results);
-        console.log(data.data.results);
-    }
+    setSearchedHero(result);
+    
+    if(Object.keys(result).length){
+      renderHeroDetails(result);
+    } 
+  }
 
-    return (
-        <HeroesContext.Provider
-         value={{
-            heroDetails,
-            getHeroes,
-            renderHeroDetails,
-            fetch,
-         }}    
-        >
-            { children }
-        </HeroesContext.Provider>
-    )
+  const toggleSearchBool = (bool) => {
+    setToggleSearch(bool);
+    selectCategory("characters");
+  }
 
+  function nextHeroes() {
+    setNextPreviousHeroes(nextPreviousHeroes + 12);
+  }
+
+  function previousHeroes() {
+    if(nextPreviousHeroes > 0) setNextPreviousHeroes(nextPreviousHeroes - 12);
+  }
+
+  function renderHeroDetails(hero) {
+    setHeroDetails(hero);
+  }
+
+  return (
+    <HeroesContext.Provider
+      value={{
+        heroDetails,
+        getHeroes,
+        nextPreviousHeroes,
+        searchedHero,
+        toggleSearch,
+        category,
+        renderHeroDetails,
+        fetch,
+        nextHeroes,
+        previousHeroes,
+        fetchHeroSearch,
+        toggleSearchBool,
+        selectCategory
+      }}
+    >
+      {children}
+    </HeroesContext.Provider>
+  );
 }
 
 export const useDataHero = () => {
-    return useContext(HeroesContext)
-}
+  return useContext(HeroesContext);
+};

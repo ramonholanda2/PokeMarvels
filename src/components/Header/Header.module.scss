@@ -7,18 +7,29 @@
        height: 4rem;
        list-style: none;
 
-       li {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin: 0 1rem;
+       a {
+           text-decoration: none;
+           color: black;
+           li {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 1rem;
+    
+            &:hover {
+                color: wheat;
+                cursor: pointer;
+            }
+       }
+
     }
    }
    button, img {
        position: absolute;
-       left: 3px;
+       left: 5px;
 
        height: 4.1rem;
-       width: 3.8rem;
+       width: 5rem;
+       
        background: transparent;
        border: none;
 
@@ -26,4 +37,25 @@
            cursor: pointer;
        }
    }
+}
+
+@media(max-width: 700px) {
+    .appHeader {
+        ul {
+            justify-content:flex-end;
+        }
+    }
+}
+
+@media(max-width: 410px) {
+    .appHeader {
+        ul {
+            a {
+                li {
+                    font-size: 15px;
+                    margin: 0 0.3rem;
+                }
+            }
+        }
+    }
 }

@@ -7,7 +7,6 @@
     border: 2.5px solid #b60b0b;
     border-radius: 8px;
 
-    width: 18rem;
     
     margin: 1rem 1.5rem;
     padding: 1rem;
@@ -52,5 +51,11 @@
             cursor: pointer;
             filter: brightness(120%);
         }
+    }
+}
+
+@media(min-width: 700px) {
+    .heroCard {
+        width: 18rem;
     }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -6,23 +6,38 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import {Link} from 'react-router-dom';
 
 import styles from "./Header.module.scss";
+import { useDataHero } from "../../context/index";
 
 const Header = () => {
+  const { selectCategory, category, fetch } = useDataHero();
   let location = useLocation();
+
+  useEffect(() => {
+    fetch();
+  }, [category])
   
   return (
     <header className={styles.appHeader}>
         {location.pathname === "/CharacterDetails" ? (
           <Link to='/'>
-            <button><IoMdArrowRoundBack size='2rem'/></button>
+            <button><IoMdArrowRoundBack size='2rem' /></button>
           </Link>
         ) : (
-          "jose"
+          <Link to='/'>
+            <img src='/images/marvel.svg' alt="Marvel logo" />
+          </Link>
         )}
       <ul>
-        <li>Characters</li>
-        <li>Events</li>
-        <li>Libraries</li>
+        
+        <Link to='/'>
+          <li onClick={() => selectCategory('characters')}>Characters</li>
+        </Link>
+        <Link to='/'>
+          <li onClick={() => selectCategory('events')}>Events</li>
+        </Link>
+        <Link to='/'>
+          <li onClick={() => selectCategory('series')}>Series</li>
+        </Link>
       </ul>
     </header>
   );

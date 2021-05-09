@@ -1,18 +1,22 @@
 .heroDetails {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    border: 1px solid red;
+    justify-content: space-around;
 
-    padding-top: 2rem;
+    padding-top: 4rem;
 
     .hero {
-        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         height: 100%;
+        padding-right: 8rem;
+        border-right: 2px solid red;
 
         h1 {
             text-align: center;
-            color: rgb(235, 235, 235);
+            color: #ebebeb;
         }
         img {
             width: 28rem;    
@@ -22,9 +26,91 @@
         }
     }
     .details {
+        display: flex;
+        align-items: center;
         flex: 1;
-        border: 1px solid red;
-        max-width: 40rem;
-        color: rgb(243, 243, 243);
+        flex-direction: column;
+        justify-content: space-around;
+
+        max-width: 45rem;
+        min-height: 30rem;
+
+        color: #f3f3f3;
+        text-align: center;
+
+        .links {
+            a {
+                text-decoration: none;
+                color: #f3f3f3;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.backCharacters {
+    color: white;
+
+    a {
+        color: blue;
+
+        &:hover {
+            filter: brightness(120%);
+        }
+    }
+}
+
+@media(max-width: 1338px) {
+    .heroDetails {
+        .hero {
+            padding-right: 4rem;
+
+            img {
+                width: 25rem;
+                height: 25rem;
+            }
+        }
+        .details {
+            max-width: 28rem;
+        }
+    }
+}
+
+@media(max-width: 950px) {
+    .heroDetails {
+        padding-top: 1rem;
+        flex-direction: column;
+        .hero {
+            padding-right: 0;
+            padding-bottom: 1rem;
+            border-right: none;
+            border-bottom: 2px solid red;
+
+            img {
+                width: 25rem;
+                height: 25rem;
+            }
+        }
+        .details {
+            max-width: 32rem;
+        }
+    }
+}
+
+@media(max-width: 550px) {
+    .heroDetails {
+        .hero {
+            img {
+                width: 18rem;
+                height: 18rem;
+            }
+        }
+        .details {
+            padding: 0 1rem;
+            flex: 1;
+        }
     }
 }
