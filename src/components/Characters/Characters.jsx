@@ -12,7 +12,7 @@ const Characters = () => {
 
     useEffect(() => {
         fetch();
-    }, [nextPreviousHeroes])
+    }, [fetch, nextPreviousHeroes])
 
     return (
         <div className={styles.heroesComponent}>

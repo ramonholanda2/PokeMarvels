@@ -14,7 +14,7 @@ const Header = () => {
 
   useEffect(() => {
     fetch();
-  }, [category])
+  }, [category, fetch])
   
   return (
     <header className={styles.appHeader}>
