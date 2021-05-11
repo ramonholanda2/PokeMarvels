@@ -12,8 +12,8 @@ export function HeroesContextProvider({ children }) {
   const [searchedHero, setSearchedHero] = useState({});
   const [toggleSearch, setToggleSearch] = useState(Boolean);
 
-  const publicKEY = "87fa0016c6af282d2b76bc952180cb23";
-  const privateKEY = "3b20eeafd6247347cbbaaa97b990e8d5f9de7eea";
+  const publicKEY = "3bce82eecb02f4e15c235999ceec8192";
+  const privateKEY = "0ca12c2cce0205109716faead74057990f89315a";
   const time = Number(new Date());
   const hash = md5(time + privateKEY + publicKEY);
 
