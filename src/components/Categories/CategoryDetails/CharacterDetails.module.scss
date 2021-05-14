@@ -1,4 +1,4 @@
-.heroDetails {
+.categoryDetails {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -64,7 +64,7 @@
 }
 
 @media(max-width: 1338px) {
-    .heroDetails {
+    .categoryDetails {
         .hero {
             padding-right: 4rem;
 
@@ -80,7 +80,7 @@
 }
 
 @media(max-width: 950px) {
-    .heroDetails {
+    .categoryDetails {
         padding-top: 1rem;
         flex-direction: column;
         .hero {
@@ -101,7 +101,7 @@
 }
 
 @media(max-width: 550px) {
-    .heroDetails {
+    .categoryDetails {
         .hero {
             img {
                 width: 18rem;

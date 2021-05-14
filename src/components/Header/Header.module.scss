@@ -1,4 +1,10 @@
+.displayNone {
+    display: none;
+}
 .appHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #c90303;
     ul {
        display: flex;
@@ -24,9 +30,6 @@
     }
    }
    button, img {
-       position: absolute;
-       left: 5px;
-
        height: 4.1rem;
        width: 5rem;
        
@@ -37,6 +40,20 @@
            cursor: pointer;
        }
    }
+   .account {
+       display: flex;
+       align-items: center;
+
+       img {
+           object-fit: cover;
+           border-radius: 999%;
+           height: 50px;
+           width: 50px;
+       }
+       span {
+           margin: 0 0.5rem;
+       }
+   }
 }
 
 @media(max-width: 700px) {
@@ -44,10 +61,21 @@
         ul {
             justify-content:flex-end;
         }
+        .account {
+            flex-direction: column;
+            img {
+                width: 25px;
+                height: 25px;
+            }
+            span {
+                text-align: center;
+                font-size: small;
+            }
+        }
     }
 }
 
-@media(max-width: 410px) {
+@media(max-width: 476px) {
     .appHeader {
         ul {
             a {
@@ -55,6 +83,11 @@
                     font-size: 15px;
                     margin: 0 0.3rem;
                 }
+            }
+        }
+        .account {
+            span{
+                display: none;
             }
         }
     }

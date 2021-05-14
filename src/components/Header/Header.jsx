@@ -9,17 +9,17 @@ import styles from "./Header.module.scss";
 import { useDataHero } from "../../context/index";
 
 const Header = () => {
-  const { selectCategory, category, fetch } = useDataHero();
+  const { user, selectCategory, category, fetch } = useDataHero();
   let location = useLocation();
 
   useEffect(() => {
     fetch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category])
+  }, [category]);
   
   return (
-    <header className={styles.appHeader}>
-        {location.pathname === "/CharacterDetails" ? (
+    <header className={user ? styles.appHeader : styles.displayNone}>
+        {location.pathname === "/CategoryDetails" ? (
           <Link to='/'>
             <button><IoMdArrowRoundBack size='2rem' /></button>
           </Link>
@@ -28,8 +28,8 @@ const Header = () => {
             <img src='/images/marvel.svg' alt="Marvel logo" />
           </Link>
         )}
+
       <ul>
-        
         <Link to='/'>
           <li onClick={() => selectCategory('characters')}>Characters</li>
         </Link>
@@ -40,6 +40,11 @@ const Header = () => {
           <li onClick={() => selectCategory('series')}>Series</li>
         </Link>
       </ul>
+
+      <div className={styles.account}>
+          <img src={user?.photoURL} alt="" />
+          <span>{user?.displayName}</span>
+      </div>
     </header>
   );
 };
