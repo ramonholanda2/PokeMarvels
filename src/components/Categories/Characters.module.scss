@@ -1,0 +1,55 @@
+.heroesComponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .gridHeroes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .buttons {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content:space-around;
+        
+        padding-top: 0.5rem;
+        padding-bottom: 1.5rem;
+
+        button {
+            width: 8rem;
+            height: 2.5rem;
+            border-radius: 5px;
+    
+            margin-left: 1rem;
+            background-color: #b11414;
+            color: #e4e4e4;
+            font-size: 1rem;
+            border: 2.5px solid #f30202d3;
+            border-radius: 4px;
+    
+            &:hover {
+                filter: brightness(120%);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media(max-width: 1042px) {
+    .heroesComponent {
+        .gridHeroes {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media(max-width: 700px) {
+    .heroesComponent {
+        .gridHeroes {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}

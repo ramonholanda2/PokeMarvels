@@ -6,16 +6,21 @@ export const HeroesContext = createContext();
 
 export function HeroesContextProvider({ children }) {
   const [category, setCategory] = useState('characters');
-  const [heroDetails, setHeroDetails] = useState({});
-  const [getHeroes, setGetHeroes] = useState([]);
-  const [nextPreviousHeroes, setNextPreviousHeroes] = useState(0);
+  const [categoryDetails, setCategoryDetails] = useState({});
+  const [getCategory, setGetCategory] = useState([]);
+  const [nextPreviousCategory, setNextPreviousCategory] = useState(0);
   const [searchedHero, setSearchedHero] = useState({});
   const [toggleSearch, setToggleSearch] = useState(Boolean);
+  const [user, setUser] = useState(null);
 
-  const publicKEY = "87fa0016c6af282d2b76bc952180cb23";
-  const privateKEY = "3b20eeafd6247347cbbaaa97b990e8d5f9de7eea";
+  const publicKEY = "3bce82eecb02f4e15c235999ceec8192";
+  const privateKEY = "0ca12c2cce0205109716faead74057990f89315a";
   const time = Number(new Date());
   const hash = md5(time + privateKEY + publicKEY);
+
+  function getUser(user) {
+    setUser(user);
+  }
 
   function selectCategory(option) {
     setCategory(option);
@@ -23,10 +28,11 @@ export function HeroesContextProvider({ children }) {
   
   async function fetch() {
     const { data } = await axios.get(
-      `http://gateway.marvel.com/v1/public/${category}?limit=12&offset=${nextPreviousHeroes}&ts=${time}&apikey=${publicKEY}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/${category}?limit=12&offset=${nextPreviousCategory}&ts=${time}&apikey=${publicKEY}&hash=${hash}`
       );
-      
-      setGetHeroes(data.data.results);
+
+      console.log(data.data.results)
+      setGetCategory(data.data.results);
     }
 
   const fetchHeroSearch = async(hero) => {
@@ -37,7 +43,7 @@ export function HeroesContextProvider({ children }) {
     setSearchedHero(result);
     
     if(Object.keys(result).length){
-      renderHeroDetails(result);
+      renderCategoryDetails(result);
     } 
   }
 
@@ -46,31 +52,38 @@ export function HeroesContextProvider({ children }) {
     selectCategory("characters");
   }
 
-  function nextHeroes() {
-    setNextPreviousHeroes(nextPreviousHeroes + 12);
+  function nextCategory() {
+    setNextPreviousCategory(nextPreviousCategory + 12);
   }
 
-  function previousHeroes() {
-    if(nextPreviousHeroes > 0) setNextPreviousHeroes(nextPreviousHeroes - 12);
+  function previousCategory() {
+    if(nextPreviousCategory > 0) setNextPreviousCategory(nextPreviousCategory - 12);
   }
 
-  function renderHeroDetails(hero) {
-    setHeroDetails(hero);
+  function renderCategoryDetails(hero) {
+    setCategoryDetails(hero);
   }
 
   return (
     <HeroesContext.Provider
       value={{
-        heroDetails,
-        getHeroes,
-        nextPreviousHeroes,
+        //heroDetails,
+        categoryDetails,
+        //getHeroes,
+        getCategory,
+        nextPreviousCategory,
         searchedHero,
         toggleSearch,
         category,
-        renderHeroDetails,
+        user,
+        getUser,
+        //renderHeroDetails,
+        renderCategoryDetails,
         fetch,
-        nextHeroes,
-        previousHeroes,
+        //nextHeroes,
+        nextCategory,
+        //previousHeroes,
+        previousCategory,
         fetchHeroSearch,
         toggleSearchBool,
         selectCategory
